@@ -5,13 +5,13 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    timeRequired: {
+    duration: {
         type: Number,
-        requied: true
+        default: 60
     },
-    dueDate: {
+    due: {
         type: Date,
-        required: true
+        default: new Date()
     },
     mentalEffor: {
         type: Number,
@@ -25,7 +25,15 @@ const taskSchema = new mongoose.Schema({
         type: Number,
         default: null
     },
-    scheuled: {
+    timeSpent: {
+        type: Number,
+        default: 0
+    },
+    playing: {
+        type: Boolean,
+        default: false
+    },
+    done: {
         type: Boolean,
         default: false
     },
@@ -33,7 +41,17 @@ const taskSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    }
+    },
+    chunks: [{
+        duration: {
+            type: Number,
+            required: true
+        },
+        scheduledTime: {
+            type: Date,
+            default: null
+        }
+    }]
 });
 
 const Task = mongoose.model("Task", taskSchema);

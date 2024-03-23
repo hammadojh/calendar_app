@@ -2,10 +2,12 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const db = require("./config/db");
 const cors = require("cors");
-const dotenv = require('dotenv');
 
 // express app
 const app = express();
+
+// serve public files
+app.use(express.static('public'))
 
 // middleware
 app.use(bodyParser.json());
@@ -21,8 +23,14 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something went wrong');
 });
 
+//default route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Task Scheduler API')
+})
+
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3010;
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })

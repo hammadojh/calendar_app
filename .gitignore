@@ -1,0 +1,4 @@
+node_modules
+.env
+bootstrap
+mongo_collections
